@@ -5,3 +5,5 @@ $_ENV['DB']['user'] = 'root';
 $_ENV['DB']['password'] = '3306';
 $_ENV['DB']['instance'] = 'localhost';
 
+$_ENV['DEBUG'] = false;
+
