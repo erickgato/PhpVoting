@@ -2,11 +2,17 @@
 namespace App\Model;
 
 use mysqli;
-
+/**
+ * @author Erick gato <a.itsbk0703@gmail.com>
+ * @package App
+ * @description cofigure string escape and conection 
+ * 
+ */
 class Database {
 
-    public $config;
-    public $connection;
+    private array $config;
+    public mysqli $connection;
+
 
     public function __construct() {
        $this->config = array(
@@ -17,6 +23,12 @@ class Database {
             "port" => $_ENV['DB']['port'],
         );
     }
+
+    /**
+     * @description up a mysqli api conection
+     * @return mysqli instance
+     * 
+     */
     public function UP(){
         $config = $this->config;
         try {
@@ -40,6 +52,10 @@ class Database {
         }
        
     }
+    /**
+     * @description Close mysqli connection
+     * @return bool
+     */
     public function DOWN() {
         if($this->connection)
             return $this->connection->close();
