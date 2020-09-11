@@ -1,0 +1,13 @@
+{
+    "name": "voting/system",
+    "description": "Sistema de enquetes e votos com php",
+    "type": "project",
+    "license": "Apache-2.0",
+    "authors": [
+        {
+            "name": "erickgato",
+            "email": "itsbk0703@gmail.com"
+        }
+    ],
+    "require": {}
+}
