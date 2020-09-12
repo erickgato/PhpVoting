@@ -3,9 +3,21 @@
 include_once 'config/env.php';
 require __DIR__ . '/vendor/autoload.php';
 //Set UTF-8 as global encode
-use App\Model\User as User;
+use App\Model\User;
+use App\Model\Status;
+use App\Model\Imodel;
+use App\Model\Survey;
+use App\Model\Generics\Database;
 
-$usr = new User();
+$conection = new Database();
+function CreateModel(Imodel $model)
+{
+    return $model;
+}
 
-var_dump($usr->SELECT('*'));
+$usr = CreateModel(new User($conection));
+$stts = CreateModel(new Status($conection));
+$sur = CreateModel(new Status($conection));
+
+
 mb_internal_encoding('UTF-8');
