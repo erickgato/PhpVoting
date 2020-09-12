@@ -20,11 +20,11 @@ class Database
     public function __construct()
     {
         $this->config = array(
-            "database" => $_ENV['DB']['name'],
-            "user" => $_ENV['DB']['user'],
-            "password" => $_ENV['DB']['password'],
-            "instance" => $_ENV['DB']['instance'],
-            "port" => $_ENV['DB']['port'],
+            "database" => DBNAME,
+            "user" => DBUSER,
+            "password" => DBpass,
+            "instance" => DBinstance,
+            "port" => DBport,
         );
     }
 
@@ -45,7 +45,7 @@ class Database
                 $config['port']
             );
             if ($this->connection->connect_error) {
-                if ($_ENV['DEBUG'])
+                if (DEBUG)
                     echo "<pre>error: <br/> {$this->connection->connect_error}  </pre>";
                 else
                     echo "internal server error, try again later";

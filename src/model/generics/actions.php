@@ -5,6 +5,7 @@ namespace App\Model\Generics;
 use mysqli_result;
 use mysqli;
 use App\Model\Generics\Table;
+
 /**
  * @Description Represents a crud action for each model in project
  * @Properties $Mysqlconection: MYSQLI object/ $_Table: table class instance
@@ -33,11 +34,11 @@ abstract class Actions
     private function getResult(string $sql): bool
     {
         $result = $this->Mysqlconection->query($sql) ? true : false;
-        if(($_ENV['DEBUG']) && (!$result)){
+        if ((DEBUG) && (!$result)) {
             print("SQL ERROR: <br/> {$this->Mysqlconection->error} <br/> ");
             print("SQL Is: {$sql}<Br/>");
         }
-            
+
         return $result;
     }
     /**
@@ -53,7 +54,9 @@ abstract class Actions
         $query = "INSERT INTO {$this->_Table->name} VALUES (null,'$RowData') ";
         $result = $this->getResult($query);
         if ($result)
-            $this->_Table->index->value = $this->Mysqlconection->insert_id;
+            $result = $this->_Table->index->value = $this->Mysqlconection->insert_id;
+        else 
+            $result = false;
 
         return $result;
     }
@@ -62,7 +65,7 @@ abstract class Actions
      * @param int $id
      * @return bool
      */
-    public function DELETE(int $id) : bool
+    public function DELETE(int $id): bool
     {
         $query = "DELETE FROM {$this->_Table->name} WHERE {$this->_Table->index->name} = $id";
         return $this->getResult($query);
@@ -71,11 +74,10 @@ abstract class Actions
      * @description Update a row from database
      * @param array of values to update / $id to delimiter 
      */
-    public function UPDATE(array $values, int $id) : bool
+    public function UPDATE(array $values, int $id): bool
     {
         $table = $this->_Table;
         $update = ""; // intializes a update query syntax
-        var_dump(count($table->fields));
         foreach ($table->fields as $key => $field) {
             if ($key == (count($table->fields) - 1)) {
                 $update .= " $field = '$values[$key]' "; // ...lastupdate
@@ -93,23 +95,29 @@ abstract class Actions
      * string Joinclause to fetch data from multiple tables
      * @return array
      */
-    public function SELECT(string $fieldstoselect, array $where = null, bool $nmlines = false, string $joinSQL = '')
+    public function SELECT(string $fieldstoselect, string $where = null, bool $nmlines = false, string $joinSQL = '')
     {
         $sql = '';
         $whereClause = '';
 
         if ($where != null)
-            $whereClause = "WHERE '{$where[0]}' = '{$where[1]}' "; // index 0 represents key, 1 represents value
+            $whereClause = "WHERE $where "; // index 0 represents key, 1 represents value
 
 
         $sql = "SELECT {$fieldstoselect} FROM {$this->_Table->name} {$joinSQL} {$whereClause}";
 
         $result = $this->Mysqlconection->query($sql);
-        if ($nmlines)
+        if ($this->Mysqlconection->error)
+            if (DEBUG)
+                echo $this->Mysqlconection->error;
+
+
+        if (($nmlines) && ($result !== false))
             return $this->SelectNumRows($result);
 
-        else
+        else if ($result !== false)
             return $this->SelectAssoc($result);
+        else return false;
     }
     /**
      * @description especific for select method fetch result to asociative array
@@ -135,7 +143,9 @@ abstract class Actions
      */
     private function SelectNumRows(mysqli_result $resultquery)
     {
+        echo "Count starting";
         $nmrows = mysqli_num_rows($resultquery);
+        var_dump($nmrows);
         return $nmrows;
     }
 }
