@@ -1,7 +1,10 @@
 <?php
 
-namespace App\Model;
+namespace App\Model\Generics;
+
 use mysqli_result;
+use mysqli;
+use App\Model\Generics\Table;
 /**
  * @Description Represents a crud action for each model in project
  * @Properties $Mysqlconection: MYSQLI object/ $_Table: table class instance
@@ -9,13 +12,13 @@ use mysqli_result;
  */
 abstract class Actions
 {
-    protected $Mysqlconection;
-    protected $_Table;
+    protected mysqli $Mysqlconection;
+    protected Table $_Table;
     /**
      * @description transform array to text with correct separation
      * @param $array to inplode and $delimiter to separate array
      * @return string
-     */ 
+     */
     private function implodeArray(array $array, string $delimiter): string
     {
 
@@ -30,21 +33,28 @@ abstract class Actions
     private function getResult(string $sql): bool
     {
         $result = $this->Mysqlconection->query($sql) ? true : false;
+        if(($_ENV['DEBUG']) && (!$result)){
+            print("SQL ERROR: <br/> {$this->Mysqlconection->error} <br/> ");
+            print("SQL Is: {$sql}<Br/>");
+        }
+            
         return $result;
     }
     /**
      * @description insert a query into database, if sucess return last id inserted
      * @param $values array of values to insert 
      * @return int
-    */
+     * @note the first index is ignored because it is primary index and auto_increment
+     */
     // Insert any data to database
     public function INSERT(array $values)
     {
         $RowData = $this->implodeArray($values, ',');
-        $query = "INSERT INTO {$this->_Table->name} VALUES ('$RowData') ";
+        $query = "INSERT INTO {$this->_Table->name} VALUES (null,'$RowData') ";
         $result = $this->getResult($query);
         if ($result)
             $this->_Table->index->value = $this->Mysqlconection->insert_id;
+
         return $result;
     }
     /**
@@ -52,7 +62,7 @@ abstract class Actions
      * @param int $id
      * @return bool
      */
-    public function DELETE(int $id)
+    public function DELETE(int $id) : bool
     {
         $query = "DELETE FROM {$this->_Table->name} WHERE {$this->_Table->index->name} = $id";
         return $this->getResult($query);
@@ -61,7 +71,7 @@ abstract class Actions
      * @description Update a row from database
      * @param array of values to update / $id to delimiter 
      */
-    public function UPDATE(array $values, int $id)
+    public function UPDATE(array $values, int $id) : bool
     {
         $table = $this->_Table;
         $update = ""; // intializes a update query syntax
@@ -122,7 +132,7 @@ abstract class Actions
      * @description select the number of rows from a query 
      * @param mysqli_result
      * @return int
-    */
+     */
     private function SelectNumRows(mysqli_result $resultquery)
     {
         $nmrows = mysqli_num_rows($resultquery);
