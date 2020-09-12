@@ -1,0 +1,198 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+:root {
+  --primary-color: #10002b;
+  --secondary-color: #fcfcfc;
+  --font-spotlight: #c77dff;
+  --button-color: #3c096c;
+  --transition: 0.3s;
+  --gray: #6c6f7f;
+}
+
+body {
+  height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.004);
+}
+/*[
+    login page
+]*/
+.loginPanel {
+  background-color: var(--secondary-color);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.loginPanel #left-flex {
+  background-color: var(--primary-color);
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  color: var(--secondary-color);
+  font-weight: 500;
+  font-size: 20pt;
+}
+.loginPanel #left-flex .spot {
+  font-size: 60pt;
+  color: var(--font-spotlight);
+}
+.loginPanel #left-flex code {
+  color: #474a8a;
+  font-size: 17pt;
+}
+.loginPanel #left-flex #js {
+  color: gold;
+}
+.loginPanel #right-flex {
+  width: 50%;
+  background-color: var(--secondary-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.loginPanel #right-flex label {
+  display: flex;
+  flex-direction: column;
+  font-weight: 400;
+  font-size: 20pt;
+}
+.loginPanel #right-flex label input {
+  border: 0.17rem solid var(--primary-color);
+  width: 20vw;
+  height: 7vh;
+  margin-bottom: 1%;
+  border-radius: 10px;
+  text-align: center;
+  font-size: 19pt;
+}
+.loginPanel #right-flex label input:focus {
+  outline: none;
+}
+.loginPanel #right-flex span {
+  font-size: 45pt;
+  margin-bottom: 6%;
+  color: var(--font-spotlight);
+}
+.loginPanel #options {
+  width: 40%;
+  margin-top: 2%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  height: 7%;
+}
+.loginPanel #options button,
+.loginPanel #option button a {
+  border: 1px solid var(--button-color);
+  width: 40%;
+  border-radius: 20px;
+  font-weight: 800;
+  font-size: 11pt;
+}
+.loginPanel #options button {
+  background-color: var(--button-color);
+  color: var(--secondary-color);
+  transition: var(--transition);
+}
+.loginPanel #options button:hover {
+  background-color: var(--primary-color);
+  cursor: pointer;
+}
+.loginPanel #options #a-link {
+  background-color: var(--secondary-color);
+  color: var(--button-color);
+}
+.loginPanel #options #a-link {
+  border: 2px solid var(--primary-color);
+}
+.loginPanel #options #a-link:hover {
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
+}
+.loginPanel #options button a:link {
+  text-decoration: none;
+  color: var(--button-color);
+}
+.credits {
+    position: absolute;
+    color: var(--gray);
+    bottom: 0;
+    right: 0;
+    font-size: 11pt;
+}
+/*[Responsive]*/
+
+@media (max-width: 800px) {
+  .loginPanel #left-flex {
+    display: none;
+  }
+  .loginPanel #right-flex {
+    width: 100%;
+    height: 100%;
+    background-color: var(--primary-color);
+    align-items: center;
+    justify-content: center;
+  }
+  .loginPanel #right-flex span {
+    margin-bottom: 0%;
+    color: #e0aaff;
+  }
+  .loginPanel #right-flex label {
+    color: var(--gray);
+    text-transform: uppercase;
+    font-size: 12pt;
+    margin-top: 4%;
+  }
+  .loginPanel #right-flex label input {
+    width: 98%;
+    font-size: 19pt;
+    background-color: var(--primary-color);
+    clear: both;
+    border-bottom: 0.12rem solid var(--gray);
+    border-radius: 0;
+    color: var(--secondary-color);
+  }
+  .loginPanel #right-flex #options {
+    position: absolute;
+    bottom: 10%;
+    flex-direction: column;
+    left: 10%;
+    width: 80%;
+    height: 12%;
+    font-size: 14pt;
+  }
+  .loginPanel #right-flex #options button {
+    border-radius: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #5a189a;
+    -webkit-box-shadow: -1px -1px 20px -4px rgba(90, 24, 154, 0.82);
+    -moz-box-shadow: -1px -1px 20px -4px rgba(90, 24, 154, 0.82);
+    box-shadow: -1px -1px 20px -4px rgba(90, 24, 154, 0.82);
+    margin-bottom: 2%;
+  }
+  .loginPanel #right-flex #options #a-link {
+    background-color: transparent;
+    border: none;
+    color: var(--gray);
+    box-shadow: none;
+  }
+  
+}
+.red {
+    color: red;
+}
+.mauve {
+    color: #E0AAFF;
+}
