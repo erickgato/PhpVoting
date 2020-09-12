@@ -30,5 +30,5 @@ interface Imodel
      * string Joinclause to fetch data from multiple tables
      * @return array
      */
-    public function SELECT(string $fieldstoselect, array $where = null, bool $nmlines = false, string $joinSQL = '');
+    public function SELECT(string $fieldstoselect, string $where = null, bool $nmlines = false, string $joinSQL = '');
 }
