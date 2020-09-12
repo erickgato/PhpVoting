@@ -6,5 +6,5 @@ $_ENV['DB']['password'] = '';
 $_ENV['DB']['port'] = '3306';
 $_ENV['DB']['instance'] = '127.0.0.1';
 
-$_ENV['DEBUG'] = false;
+$_ENV['DEBUG'] = true;
 
