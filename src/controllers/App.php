@@ -4,12 +4,7 @@ use App\Controllers\LoginController;
 
 class App {
     function login() {
-        echo "Login works!";
-    }
-    function explore() {
-        echo "Browse Works";
-    }
-    function survey($data) {
-        var_dump($data);
+        return header("Location: login");
+
     }
 }
