@@ -2,10 +2,10 @@
 
 namespace App\Model;
 
-use App\Model\Actions;
-use App\Model\Table\Table;
-use App\Model\Table\PrimaryIndex;
-use App\Model\Database;
+use App\Model\Generics\Actions;
+use App\Model\Generics\Table;
+use App\Model\Generics\PrimaryIndex;
+use App\Model\Generics\Database;
 use App\Model\Imodel;
 
 /**
