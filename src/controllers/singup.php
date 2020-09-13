@@ -10,6 +10,7 @@ class SingUp
 {
 
     private Imodel $UserModel;
+    
     public function __construct()
     {
         $this->UserModel = new UserModel(new DatabaseInstance());
@@ -19,17 +20,9 @@ class SingUp
         if (!isset($_SESSION['LOGGED']))
             SingUp::getPage();
     }
-    public function receiveData($data)
-    {
-        if (
-            !(isset($data['user']['name']))  ||
-            !(isset($data['user']['email']))  ||
-            !(isset($data['user']['password']))
-        )
-            SingUp::getPage();
+    public function receiveData($data){
+        return $this->Create($data['user']['name'], $data['user']['email'], $data['user']['password']);
 
-        $result = $this->Create($data['user']['name'], $data['user']['email'], $data['user']['password']);
-        var_dump($result);
     }
     public static function getPage()
     {
