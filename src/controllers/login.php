@@ -20,7 +20,7 @@ class Login
         if (!isset($_SESSION['LOGGED']))
             Login::getPage();
         else {
-            header('Location: enquetes');
+            header("Location: " . PJURL . '/'.'enquetes/');
         }
     }
     public function receiveData($data)
@@ -49,7 +49,7 @@ class Login
         if ($cript) {
             $_SESSION['LOGGED'] = true;
             $_SESSION['USER']['id'] = $DatabaseUser[0]['usr_id'];
-            return header('Location: enquetes');
+            return header("Location: " . PJURL . '/'.'enquetes/');
         } else
             return false;
     }

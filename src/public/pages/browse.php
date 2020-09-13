@@ -22,7 +22,7 @@
             <?php foreach ($surveys as $survey) : ?>
                 <div class="item">
                     <div class="header">
-                        <a href="#">
+                        <a href="<? echo $survey['sur_id'] ?>">
                             <?  echo $survey['sur_name']; ?></a>
                     </div>
                     <div class="footer">
@@ -34,10 +34,45 @@
                 </div>
             <?php endforeach; ?>
 
-        </main>
 
+        </main>
+        <?php if ((isset($join)) && (isset($options))) : ?>
+            <div class="modal">
+                <button onclick="HideModal()" class="exit">
+                    X
+                </button>
+                <div class="title">
+                    <span>
+                        <?= $join[0]['name'] ?>
+                    </span>
+                </div>
+                <div class="options">
+                    <?php foreach ($options as $option) : ?>
+                        <div>
+                            <button> <?= $option['dat']; ?> </button> <?= $option['votes'] ?>
+                        </div>
+                    <?php endforeach; ?>
+
+                </div>
+                <div class="date">
+                    <?php foreach ($join as $_survey) : ?>
+
+                        <span> <?= $_survey['start_date']; ?> - <?= $_survey['final_date']; ?> </span> 
+                        <span> <?= $_survey['status']?></span>
+                    <?php endforeach; ?>
+                </div>
+
+            </div>
+
+
+        <?php endif; ?>
     </section>
-    <script src="src/public/js/index.js"></script>
+    <script>
+        function HideModal() {
+            const Modal = document.querySelector(".modal");
+            Modal.classList.add('closed');         
+        }
+    </script>
 </body>
 
 </html>

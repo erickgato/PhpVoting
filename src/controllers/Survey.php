@@ -26,12 +26,20 @@ class Survey
     {
         $this->getPage();
     }
-    public function getPage()
+
+    private function getJoin()
     {
-        $surveys = $this->surveyModel->select(
-            'Sur.sur_id, Sur.sur_name, usr.usr_name, stat.ss_name',null,false,
+        $join = $this->surveyModel->select(
+            'Sur.sur_id, Sur.sur_name, usr.usr_name, stat.ss_name',
+            null,
+            false,
             "as Sur INNER JOIN en_survey_status as stat on (Sur.fk_status_id = stat.ss_id)  INNER JOIN en_user as usr on (Sur.fk_usr_id = usr.usr_id)"
         );
+        return $join;
+    }
+    public function getPage()
+    {
+        $surveys = $this->getJoin();
         include 'src/public/pages/browse.php';
     }
     public function store($data)
@@ -47,6 +55,27 @@ class Survey
             }
         }
         return $this->getPage();
+    }
+    public function getSurvey($data)
+    {
+        if (!isset($data['id']))
+            return;
+        $join = $this->surveyModel->select("Sur.sur_id as id,
+            Sur.sur_name as name,
+            usr.usr_name,
+            stat.ss_name as status , 
+            Sur.sur_end_D as final_date ,
+            Sur.sur_start_d as start_date", "Sur.sur_id = {$data['id']}", false, "
+            AS Sur
+            INNER JOIN en_survey_status AS stat
+            ON
+                (Sur.fk_status_id = stat.ss_id)
+            INNER JOIN en_user AS usr
+            ON
+                (Sur.fk_usr_id = usr.usr_id)");
+        $options = $this->options->select('ro_id as id , ro_value as dat , ro_votes as votes', "fk_sur_id = {$data['id']}");
+        $surveys = $this->getJoin();
+        include 'src/public/pages/browse.php';
     }
     public function registerPage()
     {

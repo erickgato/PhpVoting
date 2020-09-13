@@ -24,7 +24,7 @@ $router->post("/", "SingUp:receiveData");
 
 $router->group("enquetes");
 $router->get("/", "Survey:index");
-$router->get("/enquete/{id}", "App:survey");
+$router->get("/{id}", "Survey:getSurvey");
 $router->get("/cadastro", "Survey:registerPage");
 $router->post("/cadastro", "Survey:store");
 
