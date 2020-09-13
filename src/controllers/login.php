@@ -19,6 +19,9 @@ class Login
     {
         if (!isset($_SESSION['LOGGED']))
             Login::getPage();
+        else {
+            header('Location: enquetes');
+        }
     }
     public function receiveData($data)
     {
@@ -37,16 +40,17 @@ class Login
     }
     public function login(UserType $User)
     {
-        $DatabaseUser = $this->UserModel->SELECT('usr_pass', "usr_email = '{$User->email}' ");
-        var_dump($DatabaseUser);
+        $DatabaseUser = $this->UserModel->SELECT('usr_pass, usr_id', "usr_email = '{$User->email}' ");
         if (!isset($DatabaseUser[0]['usr_pass']))
             return false;
 
 
-        $cript = password_verify($User->password, $DatabaseUser[0]['usr_usr_pass']);
-        if($cript)
-            return true;
-        else 
+        $cript = password_verify($User->password, $DatabaseUser[0]['usr_pass']);
+        if ($cript) {
+            $_SESSION['LOGGED'] = true;
+            $_SESSION['USER']['id'] = $DatabaseUser[0]['usr_id'];
+            return header('Location: enquetes');
+        } else
             return false;
     }
 }
