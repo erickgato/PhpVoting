@@ -15,10 +15,147 @@ body {
 }
 
 body {
+  width: 100%;
   height: 100vh;
   -webkit-font-smoothing: antialiased;
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.004);
 }
+/*[menu]*/
+.menu {
+  position: fixed;
+  left: 0;
+  top: 0;
+  background-color: var(--primary-color);
+  color: whitesmoke;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  width: 100%;
+}
+.menu ul {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  width: 97%;
+}
+.menu ul li {
+  list-style: none;
+  margin-left: 1%;
+  font-size: 23pt;
+}
+.menu ul li a {
+  color: white;
+}
+.menu ul li a:link {
+  text-decoration: none;
+}
+
+.mobile {
+  display: none;
+}
+
+.mobile a {
+  text-decoration: none;
+  color: #1e1e23;
+  opacity: 1;
+  font-family: "work sans", sans serif;
+  font-size: 1.5em;
+  font-weight: 400;
+  transition: 200ms;
+}
+.mobile a:hover {
+  opacity: 0.5;
+}
+.mobile ul {
+  padding: 0;
+  list-style-type: none;
+}
+.mobile nav {
+  background-color: #1e1e23;
+  height: 100vh;
+}
+
+.mobile #menuToggle {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 40px;
+  left: 20px;
+  z-index: 1;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.mobile #menuToggle input {
+  display: flex;
+  width: 60px;
+  height: 42px;
+  position: absolute;
+  cursor: pointer;
+  opacity: 0;
+  z-index: 2;
+}
+
+.mobile #menuToggle span {
+  display: flex;
+  width: 29px;
+  height: 2px;
+  margin-bottom: 5px;
+  position: relative;
+  background: #ffffff;
+  border-radius: 3px;
+  z-index: 1;
+  transform-origin: 5px 0px;
+  transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1),
+    background 0.5s cubic-bezier(0.77, 0.2, 0.05, 1), opacity 0.55s ease;
+}
+
+.mobile #menuToggle span:first-child {
+  transform-origin: 0% 0%;
+}
+
+.mobile #menuToggle span:nth-last-child(2) {
+  transform-origin: 0% 100%;
+}
+
+.mobile #menuToggle input:checked ~ span {
+  opacity: 1;
+  transform: rotate(45deg) translate(-3px, -1px);
+  background: #36383f;
+}
+.mobile #menuToggle input:checked ~ span:nth-last-child(3) {
+  opacity: 0;
+  transform: rotate(0deg) scale(1.1, 1.1);
+}
+
+.mobile #menuToggle input:checked ~ span:nth-last-child(2) {
+  transform: rotate(-45deg) translate(0, -1px);
+}
+
+.mobile #menu {
+  position: absolute;
+  width: 90vw;
+  height: 95vh;
+  box-shadow: 0 0 10px #85888c;
+  margin: -50px 0 0 -50px;
+  padding: 50px;
+  padding-top: 125px;
+  background-color: #f5f6fa;
+  -webkit-font-smoothing: antialiased;
+  transform-origin: 0% 0%;
+  transform: translate(-100%, 0);
+  transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1);
+}
+
+.mobile #menu li {
+  padding: 10px 0;
+  transition-delay: 2s;
+}
+
+.mobile #menuToggle input:checked ~ ul {
+  transform: none;
+}
+
 /*[
     login page
 ]*/
@@ -125,15 +262,162 @@ body {
   color: var(--button-color);
 }
 .credits {
-    position: absolute;
-    color: var(--gray);
-    bottom: 0;
-    right: 0;
-    font-size: 11pt;
+  position: absolute;
+  color: var(--gray);
+  bottom: 0;
+  right: 0;
+  font-size: 11pt;
+}
+/*[Browse Page]*/
+.explorePanel {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: center;
+  background-color: var(--secondary-color);
+}
+.explorePanel main {
+  margin-top: 4%;
+  width: 90%;
+  height: 88vh;
+  overflow-y: auto;
+  border: 1px solid var(--gray);
+}
+
+.explorePanel main .title-header {
+  height: 10vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: azure;
+}
+.explorePanel main .title-header span {
+  font-weight: 500;
+  font-size: 38pt;
+}
+.explorePanel .item {
+  border: 1px solid var(--gray);
+  height: 14%;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--secondary-color);
+}
+.explorePanel .item .header {
+  align-self: flex-start;
+  width: 97%;
+  height: 50%;
+  font-size: 24pt;
+  font-weight: 560;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-end;
+}
+.explorePanel .item .header a:link {
+  text-decoration: none;
+}
+.explorePanel .item .header a {
+  color: blue;
+  margin-left: 1%;
+}
+.explorePanel .item .footer {
+  width: 97%;
+  height: 50%;
+  color: black;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  font-weight: 700;
+  margin-left: 1em;
+}
+.explorePanel .item .footer span {
+  margin-left: 0.9%;
+}
+/*[store_survey_page]*/
+.survey-insert {
+  font-size: 12pt;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.survey-insert form {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+}
+.survey-insert form label {
+  display: flex;
+  flex-direction: column;
+  font-size: 20pt;
+}
+.survey-insert form input {
+  height: 4vh;
+  font-size: 14pt;
+}
+.survey-insert form .title {
+  align-self: center;
+  font-size: 23pt;
+}
+.survey-insert form button[type="submit"] {
+  height: 6vh;
+  align-self: center;
+  margin-top: 4%;
+  border: 1px solid var(--button-color);
+  width: 40%;
+  border-radius: 10px;
+  font-weight: 400;
+  font-size: 11pt;
+  background-color: var(--primary-color);
+  color: white;
+  font-size: 22pt;
+}
+.survey-insert #plus_options {
+  width: 3vw;
+  height: 3vh;
+}
+.survey-insert #options {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
 /*[Responsive]*/
 
 @media (max-width: 800px) {
+  .menu ul li {
+    display: none;
+  }
+  .menu {
+    height: 12vh;
+  }
+  .mobile {
+    display: block;
+  }
+  .menu ul {
+    color: green;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+  .survey-insert form {
+    width: 80%;
+  }
+  .survey-insert form button[type="submit"] {
+    border-radius: 5px;
+  }
+  .survey-insert #plus_options {
+    width: 14vw;
+    height: 4vh;
+    background-color: var(--button-color);
+    border: none;
+    color: white;
+    margin-top: 1%;
+  }
   .loginPanel #left-flex {
     display: none;
   }
@@ -188,11 +472,18 @@ body {
     color: var(--gray);
     box-shadow: none;
   }
-  
 }
 .red {
-    color: red;
+  color: red;
 }
 .mauve {
-    color: #E0AAFF;
+  color: #e0aaff;
+}
+.green {
+  color: rgb(28, 160, 28);
+}
+.active,
+.inactive {
+  font-weight: 700;
+  font-size: 14pt;
 }
