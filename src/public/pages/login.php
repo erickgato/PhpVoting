@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="Pt-Br">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="src/public/css/styles.css">
+    <link rel="stylesheet" type="text/css" href="../src/public/css/styles.css">
     <title>login</title>
 </head>
 <body>
@@ -31,11 +31,12 @@
             </label>
             <div id="options">
                 <button type="submit"> Login </button>
-                <button id="a-link" >  Cadastrar-se  </button>
+                <button onclick="ChangePage('cadastro')" id="a-link" type="button" >  Cadastrar-se  </button>
                 
             </div>   
         </form>
         <span class="credits">Made with<span class="red"> ❤ </span>by <span class="mauve">ErickGato</span> </span>
     </div>
+    <script src="src/public/js/index.js"></script>
 </body>
 </html>
