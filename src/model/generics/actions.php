@@ -14,7 +14,7 @@ use App\Model\Generics\Table;
 abstract class Actions
 {
     protected mysqli $Mysqlconection;
-    protected Table $_Table;
+    public Table $_Table;
     /**
      * @description transform array to text with correct separation
      * @param $array to inplode and $delimiter to separate array
@@ -74,12 +74,12 @@ abstract class Actions
      * @description Update a row from database
      * @param array of values to update / $id to delimiter 
      */
-    public function UPDATE(array $values, int $id): bool
+    public function UPDATE(array $fields, array $values, int $id): bool
     {
         $table = $this->_Table;
         $update = ""; // intializes a update query syntax
-        foreach ($table->fields as $key => $field) {
-            if ($key == (count($table->fields) - 1)) {
+        foreach ($fields as $key => $field) {
+            if ($key == (count($fields) - 1)) {
                 $update .= " $field = '$values[$key]' "; // ...lastupdate
             } else {
                 $update .= " $field = '$values[$key]',"; // update1, update2, ...
