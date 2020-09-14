@@ -1,5 +1,6 @@
 <?php
 session_start();
+date_default_timezone_set('America/Sao_Paulo');
 // Include the config file to setup env variables
 include_once 'config/env.php';
 require __DIR__ . '/vendor/autoload.php';
