@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Tempo de geração: 11-Set-2020 às 03:50
+-- Tempo de geração: 14-Set-2020 às 07:10
 -- Versão do servidor: 10.4.13-MariaDB
 -- versão do PHP: 7.4.8
 
@@ -33,8 +33,29 @@ CREATE TABLE `en_resp_options` (
   `ro_id` int(11) NOT NULL,
   `fk_sur_id` int(11) NOT NULL,
   `ro_value` varchar(50) NOT NULL,
-  `ro_votes` int(30) NOT NULL
+  `ro_votes` int(30) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='opções de cada enquete e quantos votos esta teve';
+
+--
+-- Extraindo dados da tabela `en_resp_options`
+--
+
+INSERT INTO `en_resp_options` (`ro_id`, `fk_sur_id`, `ro_value`, `ro_votes`) VALUES
+(35, 12, 'Laranja', 21),
+(36, 12, 'Abacaxi', 23),
+(37, 12, 'Melancia', 28),
+(38, 13, 'PHP', 115),
+(39, 13, 'JAVASCRIPT', 107),
+(40, 13, 'C#', 32),
+(41, 13, 'C++', 21),
+(42, 13, 'RUST', 3),
+(43, 13, 'PYTHON', 16),
+(44, 13, 'GO', 4),
+(45, 13, 'FORTRAN', 5),
+(57, 17, 'Vingadores ', 12),
+(58, 17, 'Jhon wick 3', 27),
+(59, 17, 'Matrix', 31),
+(60, 17, 'Superman', 3);
 
 -- --------------------------------------------------------
 
@@ -46,10 +67,19 @@ CREATE TABLE `en_survey` (
   `sur_id` int(11) NOT NULL,
   `sur_name` varchar(100) NOT NULL,
   `fk_status_id` int(11) NOT NULL,
-  `sur_start_d` date NOT NULL,
-  `sur_end_D` date NOT NULL,
+  `sur_start_d` datetime NOT NULL,
+  `sur_end_D` datetime NOT NULL,
   `fk_usr_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='aramazena enquetes e seus registros';
+
+--
+-- Extraindo dados da tabela `en_survey`
+--
+
+INSERT INTO `en_survey` (`sur_id`, `sur_name`, `fk_status_id`, `sur_start_d`, `sur_end_D`, `fk_usr_id`) VALUES
+(12, 'Qual o seu suco preferido ?', 2, '2020-09-13 00:00:00', '2020-09-26 00:00:00', 16),
+(13, 'Qual a sua linguagem de programação favorita ?', 3, '2020-09-13 22:19:00', '2020-09-13 12:19:00', 16),
+(17, 'Qual o melhor filme ?', 2, '2020-09-14 02:05:00', '2020-09-30 02:07:00', 21);
 
 -- --------------------------------------------------------
 
@@ -61,6 +91,14 @@ CREATE TABLE `en_survey_status` (
   `ss_id` int(11) NOT NULL,
   `ss_name` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Estatus das enquetes';
+
+--
+-- Extraindo dados da tabela `en_survey_status`
+--
+
+INSERT INTO `en_survey_status` (`ss_id`, `ss_name`) VALUES
+(2, 'ativo'),
+(3, 'inativo');
 
 -- --------------------------------------------------------
 
@@ -74,6 +112,18 @@ CREATE TABLE `en_user` (
   `usr_email` varchar(500) NOT NULL,
   `usr_pass` varchar(500) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Tabela para relacionar usuários com suas enquetes';
+
+--
+-- Extraindo dados da tabela `en_user`
+--
+
+INSERT INTO `en_user` (`usr_id`, `usr_name`, `usr_email`, `usr_pass`) VALUES
+(14, 'erick', 'erick@gmail.com', '$2y$10$Xtlh7L970Usfn9k.iphCa./7WyG20L6G39HwzPrG07wdJja5BrUv6'),
+(16, 'ericklin', 'js07@gmail.com', '$2y$10$iHWVCAPz20nJRfyyJv7D/uQcbl35HogfwZq55RK4VpYEY7L.Bfuly'),
+(17, 'Jonas', 'jonas@gmail.com', '$2y$10$WLg1hqb7GgkSffL.WBVleeOGbh5H1/igPmTl1p6LNbNydHpFTB0RS'),
+(18, 'joão nunes ', 'joao@gmail.com', '$2y$10$8XsWC7ATrYwEHhCjgK7QCOpwXnqEA1eQGVNcfBROLdq2KvVCvCJIe'),
+(19, 'Lucas', 'lucas@gmail.com', '$2y$10$nXwa5iox5Dse8./bUgiXQ.1QAn6UMNluRxcdvxq3MBAyMI7/s.baC'),
+(21, 'manolo', 'manolo@gmail.com', '$2y$10$JZxveXQwe2I4WRKv1OmNRuwXy2o/LBP2Eui4tJr2EKB2ZJRiwt5f6');
 
 --
 -- Índices para tabelas despejadas
@@ -115,25 +165,25 @@ ALTER TABLE `en_user`
 -- AUTO_INCREMENT de tabela `en_resp_options`
 --
 ALTER TABLE `en_resp_options`
-  MODIFY `ro_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ro_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 
 --
 -- AUTO_INCREMENT de tabela `en_survey`
 --
 ALTER TABLE `en_survey`
-  MODIFY `sur_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `sur_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT de tabela `en_survey_status`
 --
 ALTER TABLE `en_survey_status`
-  MODIFY `ss_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ss_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de tabela `en_user`
 --
 ALTER TABLE `en_user`
-  MODIFY `usr_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `usr_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- Restrições para despejos de tabelas
