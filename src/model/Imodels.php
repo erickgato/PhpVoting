@@ -22,7 +22,7 @@ interface Imodel
     // Insert any data to database
     public function INSERT(array $values);
     public function DELETE(int $id): bool;
-    public function UPDATE(array $values, int $id): bool;
+    public function UPDATE(array $fields, array $values, int $id): bool;
     /**
      * @description search data from especific database table
      * @param string fileds, array where(you have to set key into 0 index and value into 1)
