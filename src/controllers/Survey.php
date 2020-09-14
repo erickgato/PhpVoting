@@ -6,7 +6,7 @@ use App\Model\Survey as SurveyModel;
 use App\Model\ResponseOptions;
 use App\Model\Imodel;
 use App\Model\Generics\Database as DatabaseInstance;
-
+use DateTime;
 class Survey
 {
 
@@ -56,6 +56,11 @@ class Survey
         }
         return $this->getPage();
     }
+    private function FormatDate(string $date) {
+        $date = new DateTime($date);
+        $date->format('Y-m-d H:i:s.uO');
+        return $date;
+    }
     public function getSurvey($data)
     {
         if (!isset($data['id']))
@@ -75,10 +80,15 @@ class Survey
                 (Sur.fk_usr_id = usr.usr_id)");
 
         $status = "";
-        if (strtotime($join[0]['start_date']) >= strtotime($join[0]['final_date'])) {
+        $startDate = $this->FormatDate($join[0]['start_date']);
+        $finalDate = $this->FormatDate($join[0]['final_date']);
+        $today = new DateTime();
+
+        if(($today>= $startDate) && ($today <= $finalDate)){
             $status = 'active';
+            $this->surveyModel->update(['fk_status_id'], ['2'], $join[0]['id']);
         }
-        if (strtotime($join[0]['start_date']) < strtotime($join[0]['final_date'])) {
+        else {
             $status = 'inactive';
             $this->surveyModel->update(['fk_status_id'], ['3'], $join[0]['id']);
         }
