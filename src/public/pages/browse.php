@@ -38,7 +38,7 @@
         </main>
         <?php if ((isset($join)) && (isset($options))) : ?>
             <div class="modal">
-                <button onclick="HideModal()" class="exit">
+                <button onclick="hideModal()" class="exit">
                     X
                 </button>
                 <div class="title">
@@ -49,7 +49,11 @@
                 <div class="options">
                     <?php foreach ($options as $option) : ?>
                         <div>
-                            <button> <?= $option['dat']; ?> </button> <?= $option['votes'] ?>
+                            <button class="<?= $status ?>" onclick="actualizeOptionValue(<?= $option['id'] ?>)"> <?= $option['dat']; ?> </button>
+
+                            <span id="opt-<?= $option['dat']; ?>">
+                                <?= $option['votes'] ?>
+                            </span>
                         </div>
                     <?php endforeach; ?>
 
@@ -57,8 +61,8 @@
                 <div class="date">
                     <?php foreach ($join as $_survey) : ?>
 
-                        <span> <?= $_survey['start_date']; ?> - <?= $_survey['final_date']; ?> </span> 
-                        <span> <?= $_survey['status']?></span>
+                        <span> <?= $_survey['start_date']; ?> - <?= $_survey['final_date']; ?> </span>
+                        <span> <?= $_survey['status'] ?></span>
                     <?php endforeach; ?>
                 </div>
 
@@ -68,9 +72,30 @@
         <?php endif; ?>
     </section>
     <script>
-        function HideModal() {
+        const Connection = new WebSocket("ws://localhost:8080");
+        Connection.onopen = (e) => {
+            console.log('Socket Stabilished')
+        }
+        Connection.onmessage = (e) => {
+            if (e.data !== 'error') {
+                const Parser = JSON.parse(e.data)
+                const Target = document.getElementById(`opt-${Parser.data}`);
+                Target.innerHTML = Parser.value;
+            }
+
+        }
+        const actualizeOptionValue = (id) => {
+            Connection.send(JSON.stringify(getFormat(id)))
+        }
+
+        function hideModal() {
             const Modal = document.querySelector(".modal");
-            Modal.classList.add('closed');         
+            Modal.classList.add('closed')
+        }
+        const getFormat = (id) => {
+            return Format = {
+                "id": `${id}`
+            }
         }
     </script>
 </body>
