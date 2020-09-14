@@ -47,6 +47,7 @@
         </form>
         <span class="credits">Made with<span class="red"> ❤ </span>by <span class="mauve">ErickGato</span> </span>
     </div>
+    <script src="src/public/js/utils.js"></script>
     <script>
         window.addEventListener('load', function() {
             const Target = document.getElementById('password');

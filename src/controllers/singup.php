@@ -21,8 +21,8 @@ class SingUp
             SingUp::getPage();
     }
     public function receiveData($data){
-        return $this->Create($data['user']['name'], $data['user']['email'], $data['user']['password']);
-
+        $this->Create($data['user']['name'], $data['user']['email'], $data['user']['password']);
+        header('Location: login');
     }
     public static function getPage()
     {

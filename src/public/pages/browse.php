@@ -43,7 +43,7 @@
                 </button>
                 <div class="title">
                     <span>
-                        <?= $join[0]['name'] ?>
+                        <?= $join[0]['name']; ?>
                     </span>
                 </div>
                 <div class="options">
