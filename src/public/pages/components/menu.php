@@ -2,6 +2,7 @@
     <ul>
         <li> <a href="cadastro"> Cadastrar </a></li>
         <li><a href="<? echo PJURL ?>/enquetes/"> Navegar </a></li>
+        <li><a href="<? echo PJURL ?>/sair"> Sair  </a></li>
     </ul>
 </nav>
 
@@ -11,10 +12,11 @@
         <span></span>
         <span></span>
         <span></span>
+        <span></span>
         <ul id="menu">
             <li><a href="cadastro"> Cadastrar </a></li>
             <li><a href="<? echo PJURL  ?>/enquetes/"> Navegar </a></li>
-
+            <li><a href="<? echo PJURL ?>/sair"> Sair  </a></li>
         </ul>
     </div>
 </nav>

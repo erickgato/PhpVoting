@@ -37,6 +37,5 @@
         </form>
         <span class="credits">Made with<span class="red"> ❤ </span>by <span class="mauve">ErickGato</span> </span>
     </div>
-    <script src="src/public/js/index.js"></script>
 </body>
 </html>
