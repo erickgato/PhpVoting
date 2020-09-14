@@ -1,5 +1,5 @@
 # PhpVoting
-Sistema para fazer votações/ enquetes em php
+Sistema para fazer votações/ enquetes em php sem utilizar frameworks
 ### Capacidade do sistema
 1. Usuário pode criar uma enquete
 2. Nas enquetes usuário pode cadastrar opções( No minimo 3 )
@@ -14,4 +14,7 @@ Sistema para fazer votações/ enquetes em php
     Para rodar o sistema seu ambiente deve possuir o <code>composer</code> e um servidor apache de sua preferência com suporte a mysql,
     entre com o terminal no diretório root do projeto e execute <code> composer install </code>
 </p>
+2. Configure seu ambiente no arquivo {Root}/config/env.php
+3. Ainda no diretório root do projeto em seu terminal execute php socket-server.php
+
 
