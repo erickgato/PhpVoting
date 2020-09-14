@@ -9,12 +9,14 @@ Sistema para fazer votações/ enquetes em php sem utilizar frameworks
 6. Os resultados dos votos devem ser mostrados em tempo real
 
 ### Instalação
-#### ! Este sistema precisa do php em sua versão 7.4 pois ele utiliza recursos novos da linguagem
+#### Este sistema precisa do php em sua versão 7.4 pois ele utiliza recursos novos da linguagem
 <p>
     Para rodar o sistema seu ambiente deve possuir o <code>composer</code> e um servidor apache de sua preferência com suporte a mysql
 </p>
-1. entre com o terminal no diretório root do projeto e execute <code> composer install </code>
-2. Configure seu ambiente no arquivo <code>{Root}/config/env.php</code><br/>
-3. Ainda no diretório root do projeto em seu terminal execute <code>php socket-server.php</code>
+1. Entre com o terminal no diretório root do projeto e execute <code> composer install </code><br/>
+2. Importe o arquivo SQL no mysql<br/>
+3. Configure seu ambiente no arquivo <code>{Root}/config/env.php</code><br/>
+4. Ainda no diretório root do projeto em seu terminal execute <code>php socket-server.php</code><br/>
+
 
 
