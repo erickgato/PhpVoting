@@ -7,4 +7,8 @@ class App {
         return header("Location: login");
 
     }
+    function loggout() {
+        session_destroy();
+        $this->login();
+    }
 }
