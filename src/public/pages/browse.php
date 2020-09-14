@@ -17,7 +17,7 @@
         <main>
             <div class="title-header">
                 <span>Enquetes</span>
-                <p>Veja quais são as enquetes postadas pela comunidade</p>
+                
             </div>
             <?php foreach ($surveys as $survey) : ?>
                 <div class="item">
