@@ -14,6 +14,7 @@ $router->namespace("App\Controllers");
 
 $router->group(null);
 $router->get("/", "App:login");
+$router->get("/sair", "App:loggout");
 $router->group("login");
 $router->get("/", "Login:index");
 $router->post("/", "Login:receiveData");
