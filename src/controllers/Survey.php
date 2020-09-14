@@ -73,12 +73,25 @@ class Survey
             INNER JOIN en_user AS usr
             ON
                 (Sur.fk_usr_id = usr.usr_id)");
+
+        $status = "";
+        if (strtotime($join[0]['start_date']) >= strtotime($join[0]['final_date'])) {
+            $status = 'active';
+        }
+        if (strtotime($join[0]['start_date']) < strtotime($join[0]['final_date'])) {
+            $status = 'inactive';
+            $this->surveyModel->update(['fk_status_id'], ['3'], $join[0]['id']);
+        }
         $options = $this->options->select('ro_id as id , ro_value as dat , ro_votes as votes', "fk_sur_id = {$data['id']}");
         $surveys = $this->getJoin();
         include 'src/public/pages/browse.php';
     }
     public function registerPage()
     {
-        return require 'src/public/pages/cadastrar_enquete.php';
+        if(isset($_SESSION['LOGGED'])){
+            return require 'src/public/pages/cadastrar_enquete.php';
+        }
+        else 
+            header("location:" . PJURL . '/');
     }
 }
